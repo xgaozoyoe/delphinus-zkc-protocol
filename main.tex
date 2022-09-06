@@ -34,7 +34,7 @@
 %%
 %%
 %% The first command in your LaTeX source must be the \documentclass command.
-\documentclass[acmtog]{acmart}
+\documentclass[acmtog, natbib=false]{acmart}
 \usepackage[pdf]{graphviz}
 \usepackage{pgf-umlsd}
 \usepackage{listings}
@@ -104,7 +104,7 @@
 %% If you are preparing content for an event
 %% sponsored by ACM SIGGRAPH, you must use the "author year" style of
 %% citations and references.
-\citestyle{acmauthoryear}
+%\citestyle{acmauthoryear}
 
 \usepackage[
 backend=biber,
@@ -122,7 +122,7 @@ sorting=ynt
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
 \title{Delphinus Cross-Chain Aggregator}
-\newcommand{\dprotocol}{Delphinus Cross-Chain Aggregrator }
+\newcommand{\dprotocol}{Delphinus Cross-Chain Aggregator}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -133,6 +133,10 @@ sorting=ynt
 \authornote{Both authors contributed equally to this research.}
 \author{Sinka Gao}
 \email{xgao@zoyoe.com}
+\author{Fu Hong Fei}
+\email{jt002845@sjtu.edu.cn}
+\author {Li Guo Qiang}
+\email{li.g@sjtu.edu.cn}
 \affiliation{%
   \institution{ZKCross}
   \streetaddress{P.O. Box 1212}
@@ -574,12 +578,11 @@ We know that a bundled transaction $tx$ is a state transform over global state $
  
 
 \subsection{Guest Proxy Contract}
-Guest Proxy Contract contains two parts: {\bf guest chain interface} and {\bf verification} interface. Both of them manipulates the guest chain local state. Guest chain interface includes invoke and revoke which allows guest chain user to invoke or revoke a message. Verification interface is called by Delphinus cross chain node to finalize transactions.
+Guest Proxy Contract contains two parts: {\bf guest chain interface} and {\bf verification} interface (fig \ref{local-state}). Both of them manipulates the guest chain local state. Guest chain interface includes invoke and revoke which allows guest chain user to invoke or revoke a message. Verification interface is called by Delphinus cross chain node to finalize transactions.
 
-(fig: local state of guest proxy contract)
 \begin{figure}[!ht]
-\caption{case study of a cross chain token transfer}
-\label{case-study}
+\caption{local state of guest proxy contract}
+\label{local-state}
 \includegraphics[scale=0.125]{proxy-local-state.png}
 \end{figure}
 
@@ -738,7 +741,7 @@ During the first stage $s'$ is pined in native chain $C_i$ once the invoke trans
 \end{enumerate}
 
 \section{Linearity property}
-In concurrent programming, an operation (or set of operations) is linearizable if it consists of an ordered list of invocation and response events. In Delphinus cross chain protocal, the linearity property holds trivially. Because in each block generation round only one node wins the right to produce a block, the linearity hold iff and only if the final state simulated in the block can be represented as a sequence of bundled cross transactions $btx_i$. Since each block producer needs to create a zero knowledge proof to show that $s' = btx_k \circ btx_{k-1} \circ \cdots btx_0(s)$, a valid proof already shows the linearity property.
+In concurrent programming, an operation (or set of operations) is linearizable if it consists of an ordered list of invocation and response events. In Delphinus cross chain protocol, the linearity property holds trivially. Because in each block generation round only one node wins the right to produce a block, the linearity hold iff and only if the final state simulated in the block can be represented as a sequence of bundled cross transactions $btx_i$. Since each block producer needs to create a zero knowledge proof to show that $s' = btx_k \circ btx_{k-1} \circ \cdots btx_0(s)$, a valid proof already shows the linearity property.
 
 
 \printbibliography
